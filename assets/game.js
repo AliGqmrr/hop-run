@@ -14,8 +14,8 @@ const gameOverScreen = document.getElementById("gameOverScreen");
 const randomTime = Math.random() * (60 - 30) + 30;
 
 let countdown = 3;
-let countdownInterval; // Geri sayım için interval değişkeni
-let isMusicOn = localStorage.getItem("isMusicOn") === "true" || false; // Yerel depolamadan oku, yoksa varsayılan false
+let countdownInterval;
+let isMusicOn = localStorage.getItem("isMusicOn") === "true" || false; 
 let isJumping = false;
 let isGameStart = false;
 let isGameOver = false;
@@ -23,13 +23,13 @@ let verifiedScore = 0;
 let score = 0;
 let obstacles = [];
 let gameInterval, obstacleInterval;
-let obstacleSpeed = 7; // Başlangıç hızı
-let obstacleSpawnRate = 2000; // Başlangıç spawn aralığı (ms)
-let speedIncreasing = true; // Hız artış yönü
-let lastObstacleTime = 0; // Son obstacle oluşturma zamanı
+let obstacleSpeed = 7; 
+let obstacleSpawnRate = 2000;
+let speedIncreasing = true; 
+let lastObstacleTime = 0; 
 let minTimeBetweenObstacles = 1500;
-let backgroundChanges = 0; // Çalıştırılma sayısını takip eden sayaç
-let jumpCheckerActive = false; // Başlangıçta pasif
+let backgroundChanges = 0; 
+let jumpCheckerActive = false; 
 let bestRecord = getLocalStorage("bestRecord") || 0;
 
 if (bestRecord && typeof bestRecord === 'string') {
@@ -37,7 +37,6 @@ if (bestRecord && typeof bestRecord === 'string') {
 }
 
 window.onload = () => {
-  // Düzeltilmiş değeri tekrar localStorage'a kaydet
   setLocalStorage("bestRecord", parseFloat(bestRecord.toString().trim()), 365);
   
   if (bestRecord !== undefined && bestRecord !== null && bestRecord !== "") {
@@ -50,7 +49,6 @@ window.onload = () => {
 };
 
 
-// Sayfa yüklendiğinde müzik durumunu ayarla
 window.onload = function() {
     if (isMusicOn) {
         backgroundMusic.play();
@@ -66,7 +64,7 @@ function setLocalStorage(cname, cvalue, exdays) {
   d.setTime(d.getTime() + exdays * 24 * 60 * 60 * 1000);
   const data = {
     value: cvalue,
-    expires: d.getTime(), // Son kullanma zamanını milisaniye olarak saklıyoruz
+    expires: d.getTime(), 
   };
   localStorage.setItem(cname, JSON.stringify(data));
 }
@@ -79,13 +77,12 @@ function getLocalStorage(cname) {
     const data = JSON.parse(item);
     const now = Date.now();
 
-    // Süresi dolmuşsa silinir
     if (now > data.expires) {
       localStorage.removeItem(cname);
       return "0";
     }
 
-    return data.value; // Her şey yolundaysa değeri döner
+    return data.value; 
   } catch (e) {
     return "0";
   }
@@ -116,7 +113,7 @@ function jump() {
           isJumping = false;
           player.style.bottom = "20px";
           player.classList.remove("rotate");
-          player.style.bottom = "20px"; // Zemin seviyesini koru
+          player.style.bottom = "20px";
         }
       }, 25);
     }
@@ -195,9 +192,8 @@ function showScoreAnimation() {
   scoreAnimation.innerText = "+1";
   scoreAnimation.classList.add("score-animation");
 
-  // Skoru sarı yapmak için kontrol ekliyoruz
   if (score > bestRecord) {
-    scoreAnimation.style.color = "yellow"; // Sarı renk
+    scoreAnimation.style.color = "yellow"; 
   }
 
   const player = document.getElementById("player");
@@ -238,21 +234,20 @@ function endGame() {
   scoreElement.innerText = `Game Over! Final Score: ${score}`;
   gameOverScreen.style.display = "block";
 
-  /* // Player'ın hareketini durduruyoruz
-  player.style.position = "absolute"; // Player'ı sabitliyoruz
-  player.style.top = `${player.offsetTop}px`; // Yüksekliğini koruyoruz
-  player.style.left = `${player.offsetLeft}px`; // Konumunu koruyoruz*/
+  /*
+  player.style.position = "absolute"; 
+  player.style.top = `${player.offsetTop}px`; 
+  player.style.left = `${player.offsetLeft}px`; */
 
   // Engellerin hareketini durduruyoruz
   obstacles.forEach((obstacle) => {
-    obstacle.style.animation = "none"; // Engellerin animasyonlarını durduruyoruz
+    obstacle.style.animation = "none"; 
   });
 
-  // Ekran titreme efekti ekle
   document.body.classList.add("shake");
   setTimeout(() => {
     document.body.classList.remove("shake");
-  }, 500); // 500ms sonra titreme durur
+  }, 500); 
 }
 
 function resetGame() {
@@ -260,15 +255,14 @@ function resetGame() {
   score = 0;
   scoreElement.innerText = `Score: ${score}, Best Record: ${bestRecord || "0"}`;
 
-  // Player'ın tüm stil özelliklerini sıfırlıyoruz
   player.removeAttribute("style");
 
   obstacles.forEach((obstacle) => obstacle.remove());
   obstacles = [];
   gameOverScreen.style.display = "none";
-  obstacleSpeed = 7; // Başlangıç değerlerini sıfırla
+  obstacleSpeed = 7; 
   obstacleSpawnRate = 2000;
-  speedIncreasing = true; // Hız artışı yönünü sıfırla
+  speedIncreasing = true; 
   startGame();
 }
 
@@ -289,20 +283,17 @@ startButton.addEventListener("click", () => {
 restartButton.addEventListener("click", resetGame);
 
 document.addEventListener("keydown", (event) => {
-  // Hem boşluk tuşu ("Space" ve " " karakteri) hem de yukarı ok tuşuna basıldığında jump fonksiyonu çalışacak
   if (
     !isGameOver &&
     (event.key === " " || event.key === "Space" || event.key === "ArrowUp")
   ) {
     if (!event.repeat) {
-      // Tekrar basılmasını engelle
       jump();
     }
   }
 });
 
 gameContainer.addEventListener("click", (event) => {
-  // Eğer tıklanan hedef score, restartButton ya da startScreen değilse jump() çalışır
   if (
     event.target.id !== "score" &&
     event.target.id !== "restartButton" &&
@@ -321,7 +312,7 @@ musicButton.addEventListener("click", () => {
 
 function musicControl() {
     isMusicOn = !isMusicOn;
-    localStorage.setItem("isMusicOn", isMusicOn); // Müzik durumunu yerel depolamaya kaydet
+    localStorage.setItem("isMusicOn", isMusicOn);
     if (isMusicOn) {
         backgroundMusic.play();
         musicButton.src = "/assets/musicopen.png";
@@ -335,32 +326,30 @@ function startCountdown() {
   if (!isGameOver && isGameStart) {
     isGameStart = false;
     const secondTextElement = document.getElementById("secondText");
-    secondTextElement.style.display = "block"; // Geri sayım metnini göster
+    secondTextElement.style.display = "block"; 
     secondTextElement.textContent = `Game starts in: ${countdown}`;
-    document.getElementById("pauseScreen").style.display = "block"; // Pause ekranını göster
+    document.getElementById("pauseScreen").style.display = "block"; 
 
-    // gameContainer'ın arka plan rengini kontrol et
     const gameContainer = document.getElementById("gameContainer");
-    if (gameContainer.style.backgroundColor === "rgb(240, 240, 240)") { // Eğer beyaz ise
-      secondTextElement.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'; // Siyah, yarı saydam
-    } else if (gameContainer.style.backgroundColor === "rgb(0, 0, 0)") { // Eğer siyah ise
-      secondTextElement.style.backgroundColor = 'rgba(255, 255, 255, 0.5)'; // Beyaz, yarı saydam
+    if (gameContainer.style.backgroundColor === "rgb(240, 240, 240)") { 
+      secondTextElement.style.backgroundColor = 'rgba(0, 0, 0, 0.5)'; 
+    } else if (gameContainer.style.backgroundColor === "rgb(0, 0, 0)") { 
+      secondTextElement.style.backgroundColor = 'rgba(255, 255, 255, 0.5)';
     }
 
     countdownInterval = setInterval(() => {
       countdown--;
       secondTextElement.textContent = `Game starts in: ${countdown}`;
       if (countdown <= 0) {
-        clearInterval(countdownInterval); // Geri sayımı durdur
-        document.getElementById("pauseScreen").style.display = "none"; // Pause ekranını göster
+        clearInterval(countdownInterval);
+        document.getElementById("pauseScreen").style.display = "none"; 
         isGameStart = true;
 
-        // Oyunu başlat
         gameInterval = setInterval(moveObstacles, 20);
         obstacleInterval = setInterval(generateObstacle, obstacleSpawnRate);
         countdown = 3;
       }
-    }, 1000); // 1 saniyede bir geri sayım
+    }, 1000); 
   }
 }
 
@@ -374,7 +363,6 @@ document.addEventListener("visibilitychange", function () {
   } else {
     if (!isGameOver && isGameStart) {
       document.title = "Hop & Run";
-      // Oyunu başlatmadan önce geri sayımı tetikle
       startCountdown();
     }
   }
@@ -382,19 +370,19 @@ document.addEventListener("visibilitychange", function () {
 
 function changeBackground() {
   if (!isGameOver && isGameStart) {
-    backgroundChanges++; // Sayaç artırılır
+    backgroundChanges++; 
 
     if (backgroundChanges % 2 === 1) {
-      gameContainer.style.backgroundColor = "#000000"; // Siyah (tek sayılar)
-      sun.classList.remove("active"); // Yavaşça kaybolma
+      gameContainer.style.backgroundColor = "#000000"; 
+      sun.classList.remove("active"); 
       setTimeout(() => {
         sun.style.display = "none";
-      }, 500); // Opaklık animasyonu tamamlandıktan sonra display: none
+      }, 500); 
     } else {
-      gameContainer.style.backgroundColor = "#f0f0f0"; // Beyaz (çift sayılar)
-      sun.style.display = "block"; // Önce görünür yap
+      gameContainer.style.backgroundColor = "#f0f0f0"; 
+      sun.style.display = "block"; 
       setTimeout(() => {
-        sun.classList.add("active"); // Yavaşça görünme efekti
+        sun.classList.add("active"); 
       }, 10);
     }
   }
@@ -407,34 +395,27 @@ function playMusicOnInteraction() {
   }
 }
 
-// Click ve Keydown olaylarını dinle
 document.addEventListener("click", playMusicOnInteraction);
 document.addEventListener("keydown", playMusicOnInteraction);
 
 function checkForJump() {
-  if (!jumpCheckerActive) return; // Do nothing if not active
-
+  if (!jumpCheckerActive) return; 
   obstacles.forEach((obstacle) => {
     let playerRect = player.getBoundingClientRect();
     let obstacleRect = obstacle.getBoundingClientRect();
 
-    // Calculate the distance between the player and the obstacle
     let distanceToObstacle = obstacleRect.left - playerRect.right;
 
-    // Jump if the distance is short enough
     if (distanceToObstacle <= 140 && distanceToObstacle > 0) {
       jump();
     }
   });
 }
 
-// Check every 100 ms
 setInterval(checkForJump, 100);
 
-// Toggle the jump check when the "C" key is pressed
 document.addEventListener("keydown", (event) => {
   if (event.key.toLowerCase() === "c") {
-    // "C" key
     jumpCheckerActive = !jumpCheckerActive;
     console.log(
       `Jump check is now ${jumpCheckerActive ? "active" : "inactive"}.`
@@ -450,36 +431,32 @@ if ("mediaSession" in navigator && "MediaMetadata" in window) {
     artwork: [{ src: "/assets/logo.png", sizes: "512x512", type: "image/png" }],
   });
 
-  // Medya kontrol butonları (ileri, geri, duraklat) için olaylar
   navigator.mediaSession.setActionHandler("play", () => {
     backgroundMusic.play();
-    musicButton.src = "/assets/musicopen.png"; // Müzik başladığında buton resmini değiştir
+    musicButton.src = "/assets/musicopen.png"; 
   });
 
   navigator.mediaSession.setActionHandler("pause", () => {
     backgroundMusic.pause();
-    musicButton.src = "/assets/musicoff.png"; // Müzik durduğunda buton resmini değiştir
+    musicButton.src = "/assets/musicoff.png"; 
   });
 
   navigator.mediaSession.setActionHandler("stop", () => {
     backgroundMusic.pause();
     backgroundMusic.currentTime = 0;
-    musicButton.src = "/assets/musicoff.png"; // Müzik durduğunda buton resmini değiştir
+    musicButton.src = "/assets/musicoff.png";
   });
 
-  // Oynatma başladığında güncellemeyi sağla
   backgroundMusic.addEventListener("play", () => {
     navigator.mediaSession.playbackState = "playing";
-    musicButton.src = "/assets/musicopen.png"; // Müzik başladığında buton resmini değiştir
+    musicButton.src = "/assets/musicopen.png"; 
   });
 
   // Durdurulduğunda güncellemeyi sağla
   backgroundMusic.addEventListener("pause", () => {
     navigator.mediaSession.playbackState = "paused";
-    musicButton.src = "/assets/musicoff.png"; // Müzik durduğunda buton resmini değiştir
+    musicButton.src = "/assets/musicoff.png";
   });
-} else {
-  // Tarayıcı Media Session API'yi desteklemiyor
 }
 
 window.onbeforeunload = function (event) {
@@ -494,10 +471,8 @@ function checkAndReloadIfPlayerRemoved() {
   const player = document.getElementById("player");
 
   if (!player) {
-    // Player silindiyse, sayfayı yeniden yükle
     location.reload();
   }
 }
 
-// Bu fonksiyonu belirli aralıklarla çalıştırmak için setInterval ekleyelim
 setInterval(checkAndReloadIfPlayerRemoved, 300); 
