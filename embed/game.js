@@ -216,7 +216,12 @@ function endGame() {
   clearInterval(gameInterval);
   clearInterval(obstacleInterval);
   scoreElement.innerText = `Game Over! Final Score: ${score}`;
-  restartButton.style.display = "block";
+  gameOverScreen.style.display = "block";
+
+  /*
+  player.style.position = "absolute"; 
+  player.style.top = `${player.offsetTop}px`; 
+  player.style.left = `${player.offsetLeft}px`; */
 
   obstacles.forEach((obstacle) => {
     obstacle.style.animation = "none"; 
