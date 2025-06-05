@@ -71,7 +71,7 @@ function setLocalStorage(cname, cvalue, exdays) {
 
 function getLocalStorage(cname) {
   const item = localStorage.getItem(cname);
-  if (!item) return "0"; // Veri hiç yoksa
+  if (!item) return "0"; 
 
   try {
     const data = JSON.parse(item);
@@ -239,7 +239,6 @@ function endGame() {
   player.style.top = `${player.offsetTop}px`; 
   player.style.left = `${player.offsetLeft}px`; */
 
-  // Engellerin hareketini durduruyoruz
   obstacles.forEach((obstacle) => {
     obstacle.style.animation = "none"; 
   });
@@ -452,7 +451,6 @@ if ("mediaSession" in navigator && "MediaMetadata" in window) {
     musicButton.src = "/assets/musicopen.png"; 
   });
 
-  // Durdurulduğunda güncellemeyi sağla
   backgroundMusic.addEventListener("pause", () => {
     navigator.mediaSession.playbackState = "paused";
     musicButton.src = "/assets/musicoff.png";
