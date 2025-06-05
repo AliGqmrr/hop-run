@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="google-site-verification" content="F3IbYx07o8RIpXlhY5anzbIHZAs_2PHcoQZTt22BJQo" /><!-- google siteyi onaylamadı niye niye-->
+    <link rel="shortcut icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <meta name="author" content="Ali" />
+    <meta
+      name="keywords"
+      content="hop and run, hop and run game, jump and run, action game, running game, play hop and run, fun game"
+    />
+    <meta
+      name="description"
+      content="Hop & Run: A thrilling jumping and running adventure!"
+    />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content="Hop & Run" />
+    <meta
+      property="og:description"
+      content="Hop & Run: A thrilling jumping and running adventure!"
+    />
+    <meta property="og:url" content="https://hop-run.glitch.me" />
+    <meta property="og:image" content="/assets/logo.png" />
+    <meta property="og:image:secure_url" content="/assets/logo.png" />
+    <meta property="og:image:width" content="256" />
+    <meta property="og:image:height" content="256" />
+    <meta property="og:image:alt" content="Hop & Run Logo" />
+    <title>Hop &#38; Run - Embed Edition</title>
+    <link rel="stylesheet" href="/embed/game.css" />
+  </head>
+  <body>
+    <div id="gameContainer" style="background-color: #f0f0f0">
+      <div id="sun" class="active"></div>
+      <div id="player"></div>
+      <div id="ground"></div>
+      <div id="score">Score: 0, Best Record: 0</div>
+      <div id="restartButton">Restart</div>
+      <div id="startScreen">
+        <h1 id="gameTitle">Hop &#38; Run</h1>
+        <h2 id="bestRecord">Your Best Record: 0</h2>
+        <button id="startButton">Start</button>
+      </div>
+      <div id="pauseScreen" style="display: none">
+        <b id="secondText">Game starts in: 5</b>
+      </div>
+    </div>
+    <audio id="backgroundMusic" loop>
+      <source src="/assets/background_music.mp3" type="audio/mp3" />
+    </audio>
+    <audio id="jumpSound">
+      <source src="/assets/jump.mp3" type="audio/mp3" />
+    </audio>
+    <script
+      src="/embed/game.js"
+      type="text/javascript"
+      charset="utf-8"
+    ></script>
+  </body>
+</html>
