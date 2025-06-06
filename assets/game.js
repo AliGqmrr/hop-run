@@ -52,10 +52,10 @@ window.onload = () => {
 window.onload = function() {
     if (isMusicOn) {
         backgroundMusic.play();
-        musicButton.src = "/assets/musicopen.png";
+        musicButton.src = "./assets/musicopen.png";
     } else {
         backgroundMusic.pause();
-        musicButton.src = "/assets/musicoff.png";
+        musicButton.src = "./assets/musicoff.png";
     }
 };
 
@@ -314,10 +314,10 @@ function musicControl() {
     localStorage.setItem("isMusicOn", isMusicOn);
     if (isMusicOn) {
         backgroundMusic.play();
-        musicButton.src = "/assets/musicopen.png";
+        musicButton.src = "./assets/musicopen.png";
     } else {
         backgroundMusic.pause();
-        musicButton.src = "/assets/musicoff.png";
+        musicButton.src = "./assets/musicoff.png";
     }
 }
 
@@ -432,28 +432,28 @@ if ("mediaSession" in navigator && "MediaMetadata" in window) {
 
   navigator.mediaSession.setActionHandler("play", () => {
     backgroundMusic.play();
-    musicButton.src = "/assets/musicopen.png"; 
+    musicButton.src = "./assets/musicopen.png"; 
   });
 
   navigator.mediaSession.setActionHandler("pause", () => {
     backgroundMusic.pause();
-    musicButton.src = "/assets/musicoff.png"; 
+    musicButton.src = "./assets/musicoff.png"; 
   });
 
   navigator.mediaSession.setActionHandler("stop", () => {
     backgroundMusic.pause();
     backgroundMusic.currentTime = 0;
-    musicButton.src = "/assets/musicoff.png";
+    musicButton.src = "./assets/musicoff.png";
   });
 
   backgroundMusic.addEventListener("play", () => {
     navigator.mediaSession.playbackState = "playing";
-    musicButton.src = "/assets/musicopen.png"; 
+    musicButton.src = "./assets/musicopen.png"; 
   });
 
   backgroundMusic.addEventListener("pause", () => {
     navigator.mediaSession.playbackState = "paused";
-    musicButton.src = "/assets/musicoff.png";
+    musicButton.src = "./assets/musicoff.png";
   });
 }
 
