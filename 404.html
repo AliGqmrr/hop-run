@@ -82,6 +82,18 @@
     <h1>404</h1>
     <p>Oops! You missed the jump...</p>
     <p>This page doesn't exist in Hop &#38; Run.</p>
-    <a href="https://hop-run.vercel.app">🏠 Back to Safety</a>
+    <a id="home-link" href="#">🏠 Back to Safety</a>
+    <script>
+      const currentHost = window.location.hostname;
+      const link = document.getElementById("home-link");
+    
+      if (currentHost.includes("vercel.app")) {
+        link.href = "https://hop-run.vercel.app";
+      } else if (currentHost.includes("github.io")) {
+        link.href = "https://aligqmrr.github.io/hop-run/";
+      } else {
+        link.href = "https://hop-run.vercel.app";
+      }
+    </script>
   </body>
 </html>
