@@ -132,7 +132,6 @@ function moveObstacles() {
     const obstacleRect = obstacle.getBoundingClientRect();
     const gameContainerRect = gameContainer.getBoundingClientRect();
 
-    // Tüm bu blok artık if'in içinde
     if (obstacleRect.left <= gameContainerRect.left) {
       obstacle.remove();
       obstacles.splice(index, 1);
@@ -384,7 +383,7 @@ if ("mediaSession" in navigator && "MediaMetadata" in window) {
     title: "Impact Prelude",
     artist: "Kevin MacLeod",
     album: "Impact Prelude",
-    artwork: [{ src: "/assets/logo.png", sizes: "512x512", type: "image/png" }],
+    artwork: [{ src: "https://hop-run.vercel.app/assets/logo.png", sizes: "512x512", type: "image/png" }],
   });
 
   navigator.mediaSession.setActionHandler("play", () => {
