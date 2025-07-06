@@ -132,10 +132,8 @@ function moveObstacles() {
     const obstacleRect = obstacle.getBoundingClientRect();
     const gameContainerRect = gameContainer.getBoundingClientRect();
 
-    if (
-      obstacleRect.right <= gameContainerRect.left ||
-      obstacleRect.left >= gameContainerRect.right
-    ) {
+    // Tüm bu blok artık if'in içinde
+    if (obstacleRect.left <= gameContainerRect.left) {
       obstacle.remove();
       obstacles.splice(index, 1);
 
