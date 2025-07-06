@@ -148,7 +148,7 @@ function moveObstacles() {
     const obstacleRect = obstacle.getBoundingClientRect();
     const gameContainerRect = gameContainer.getBoundingClientRect();
 
-    if (obstacleRect.left <= gameContainerRect.left)
+    if (obstacleRect.left <= gameContainerRect.left) {
       obstacle.remove();
       obstacles.splice(index, 1);
 
