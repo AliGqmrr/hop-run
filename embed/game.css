@@ -1,322 +1,288 @@
 @import url("https://fonts.googleapis.com/css2?family=Press+Start+2P&display=swap");
-
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+margin: 0;
+padding: 0;
+box-sizing: border-box;
 }
-
-
 body {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
-  font-family: "Arial", sans-serif;
-  overflow: hidden;
-  margin: 0;
-  padding: 0;
-  color: #333333;
-  box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.1);
-  background-size: 200% 200%;
+display: flex;
+justify-content: center;
+align-items: center;
+height: 100vh;
+font-family: "Arial", sans-serif;
+overflow: hidden;
+margin: 0;
+padding: 0;
+color: #333333;
+box-shadow: inset 0 0 50px rgba(0, 0, 0, 0.1);
+background-size: 200% 200%;
 }
-
 #gameContainer {
-  position: absolute;
-  top: 0; /* sol başa alındı iframe için*/
-  left: 0;
-  width: 800px;
-  height: 300px;
-  border: 2px solid black;
-  transition: background-color 3s;
+position: absolute;
+top: 0;
+left: 0;
+width: 800px;
+height: 300px;
+border: 2px solid black;
+transition: background-color 3s;
 }
-
-
 #player {
-  position: absolute;
-  bottom: 20px;
-  left: 50px;
-  width: 50px;
-  height: 50px;
-  background-color: red;
-  border-radius: 5px;
-  z-index: 5;
+position: absolute;
+bottom: 20px;
+left: 50px;
+width: 50px;
+height: 50px;
+background-color: red;
+border-radius: 5px;
+z-index: 5;
 }
-
 #ground {
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  height: 20px;
-  background-color: #228b22;
+position: absolute;
+bottom: 0;
+width: 100%;
+height: 20px;
+background-color: #228b22;
 }
-
 .obstacle {
-  position: absolute;
-  width: 30px; /* Genişlik */
-  height: 50px; /* Yükseklik */
-  background-color: #333333; /* Koyu gri renkte, daha şık bir görünüm */
-  bottom: 20px;
-  z-index: 10;
-  border-radius: 5px; /* Engelin köşeleri yuvarlatıldı */
+position: absolute;
+width: 30px;
+height: 50px;
+background-color: #333333;
+bottom: 20px;
+z-index: 10;
+border-radius: 5px;
 }
-
 #score {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  font-size: 24px;
-  font-weight: bold;
-  color: #000000;
-  background-color: rgba(255, 255, 255, 0.8);
-  padding: 5px 10px;
-  border-radius: 50px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
-  border: 1px solid #cccccc;
+position: absolute;
+top: 10px;
+left: 10px;
+font-size: 24px;
+font-weight: bold;
+color: #000000;
+background-color: rgba(255, 255, 255, 0.8);
+padding: 5px 10px;
+border-radius: 50px;
+box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2);
+border: 1px solid #cccccc;
 }
-
 #startScreen {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.7);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 100;
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+background-color: rgba(0, 0, 0, 0.7);
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 100;
 }
-
 #pauseScreen {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 50;
+position: absolute;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+display: flex;
+justify-content: center;
+align-items: center;
+z-index: 50;
 }
-
 #secondText {
-  position: fixed; /* Ekranın her yerine sabitlenmesi için fixed kullanıyoruz */
-  top: 50%; /* Yükseklik açısından ortalamak için %50 */
-  left: 50%; /* Genişlik açısından ortalamak için %50 */
-  transform: translate(-50%, -50%); /* Tam ortalamak için dönüşüm ekliyoruz */
-  font-size: 2rem; /* Yazı boyutunu ayarlıyoruz */
-  font-weight: bold; /* Kalın yazı */
-  color: white; /* Beyaz yazı rengi */
-  z-index: 50; /* Ekranın önünde görünmesi için z-index */
-  text-align: center; /* Yazıyı ortalamak için text-align */
-  background-color: rgba(0, 0, 0, 0.5); /* Yarı saydam bir arka plan */
-  padding: 20px; /* Yazının etrafına boşluk ekliyoruz */
-  border-radius: 15px; /* Köşeleri oval yapmak için border-radius kullanıyoruz */
+position: fixed;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+font-size: 2rem;
+font-weight: bold;
+color: white;
+z-index: 50;
+text-align: center;
+background-color: rgba(0, 0, 0, 0.5);
+padding: 20px;
+border-radius: 15px;
 }
-
 #gameTitle {
-  position: absolute;
-  top: 20%;
-  font-size: 36px;
-  color: white;
-  text-align: center;
-  width: 100%;
+position: absolute;
+top: 20%;
+font-size: 36px;
+color: white;
+text-align: center;
+width: 100%;
 }
-
 #bestRecord {
-  position: absolute; /* Konumlandırmayı doğru şekilde yapalım */
-  top: 35%; /* Üstten %35 mesafe bırakıyoruz */
-  left: 50%; /* Elementi yatayda ortalıyoruz */
-  transform: translateX(-50%); /* Yatayda tam ortalama sağlıyor */
-  font-size: 20px;
-  color: white;
-  text-align: center;
-  width: 100%;
+position: absolute;
+top: 35%;
+left: 50%;
+transform: translateX(-50%);
+font-size: 20px;
+color: white;
+text-align: center;
+width: 100%;
 }
-
 #startButton {
-  padding: 15px 30px;
-  font-size: 24px;
-  background-color: #4caf50;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  margin-top: 40px;
+padding: 15px 30px;
+font-size: 24px;
+background-color: #4caf50;
+color: white;
+border: none;
+cursor: pointer;
+border-radius: 5px;
+margin-top: 40px;
 }
-
 #restartButton {
-  position: absolute;
-  bottom: 40px;
-  left: 50%;
-  transform: translateX(-50%);
-  padding: 10px 20px;
-  font-size: 18px;
-  background-color: #f44336;
-  color: white;
-  border: none;
-  cursor: pointer;
-  border-radius: 5px;
-  display: none;
-  z-index: 15;
+position: absolute;
+bottom: 40px;
+left: 50%;
+transform: translateX(-50%);
+padding: 10px 20px;
+font-size: 18px;
+background-color: #f44336;
+color: white;
+border: none;
+cursor: pointer;
+border-radius: 5px;
+display: none;
+z-index: 15;
 }
-
 .rotate {
-  animation: rotateAnimation 4.5s linear;
+animation: rotateAnimation 4.5s linear;
 }
-
 .score-animation {
-  position: absolute;
-  color: red;
-  font-size: 50px; /* Daha büyük yazı boyutu */
-  font-weight: bold;
-  animation: fadeMove 1.5s ease-out forwards;
-  pointer-events: none; /* Tıklanmayı engelle */
-  transform: translate(-50%, -50%); /* Ortalamak için */
+position: absolute;
+color: red;
+font-size: 50px;
+font-weight: bold;
+animation: fadeMove 1.5s ease-out forwards;
+pointer-events: none;
+transform: translate(-50%, -50%);
 }
-
 #musicButton {
-  position: absolute;
-  top: 10px;
-  left: 10px;
-  width: 40px;
-  height: 40px;
-  cursor: pointer;
-  z-index: 101;
+position: absolute;
+top: 10px;
+left: 10px;
+width: 40px;
+height: 40px;
+cursor: pointer;
+z-index: 101;
 }
-
 #sun {
-  width: 50px;
-  height: 50px;
-  background-color: yellow;
-  border-radius: 50%;
-  box-shadow: 0 0 40px rgba(255, 255, 0, 0.9); /* Daha büyük ve parlak sarı gölge */
-  position: absolute;
-  top: 15px;
-  right: 20px;
-  opacity: 1; /* Opaklık arttırıldı */
-  transition: opacity 0.5s ease-in-out;
-  pointer-events: none; /* Gizliyken tıklanmasını engeller */
+width: 50px;
+height: 50px;
+background-color: yellow;
+border-radius: 50%;
+box-shadow: 0 0 40px rgba(255, 255, 0, 0.9);
+position: absolute;
+top: 15px;
+right: 20px;
+opacity: 1;
+transition: opacity 0.5s ease-in-out;
+pointer-events: none;
 }
-
 #sun.active {
-  opacity: 1;
-  pointer-events: auto;
+opacity: 1;
+pointer-events: auto;
 }
-
 audio {
-  display: none;
+display: none;
 }
-
 footer {
-  text-align: center;
-  padding: 20px;
-  background-color: rgba(255, 255, 255, 0);
-  font-size: 12px;
-  color: #000000;
-  position: absolute;
-  bottom: 0;
-  width: 100%;
-  font-weight: bold;
+text-align: center;
+padding: 20px;
+background-color: rgba(255, 255, 255, 0);
+font-size: 12px;
+color: #000000;
+position: absolute;
+bottom: 0;
+width: 100%;
+font-weight: bold;
 }
-
 @keyframes backgroundMove {
-  0% {
-    background-position: 0% 0%;
-  }
-  100% {
-    background-position: 100% 100%;
-  }
+0% {
+background-position: 0% 0%;
 }
-
+100% {
+background-position: 100% 100%;
+}
+}
 @keyframes fadeMove {
-  0% {
-    opacity: 1;
-    transform: translate(-50%, -50%) scale(1); /* Ortalanmış başlangıç */
-  }
-  100% {
-    opacity: 0;
-    transform: translate(-50%, -150%) scale(1); /* Yukarı doğru kayarken yok olma */
-  }
+0% {
+opacity: 1;
+transform: translate(-50%, -50%) scale(1);
 }
-
+100% {
+opacity: 0;
+transform: translate(-50%, -150%) scale(1);
+}
+}
 @keyframes rotateAnimation {
-  0% {
-    transform: rotate(0deg);
-  }
-  10% {
-    transform: rotate(36deg);
-  }
-  20% {
-    transform: rotate(72deg);
-  }
-  30% {
-    transform: rotate(108deg);
-  }
-  40% {
-    transform: rotate(144deg);
-  }
-  50% {
-    transform: rotate(180deg);
-  }
-  60% {
-    transform: rotate(216deg);
-  }
-  70% {
-    transform: rotate(252deg);
-  }
-  80% {
-    transform: rotate(288deg);
-  }
-  90% {
-    transform: rotate(324deg);
-  }
-  100% {
-    transform: rotate(360deg);
-  }
+0% {
+transform: rotate(0deg);
 }
-
+10% {
+transform: rotate(36deg);
+}
+20% {
+transform: rotate(72deg);
+}
+30% {
+transform: rotate(108deg);
+}
+40% {
+transform: rotate(144deg);
+}
+50% {
+transform: rotate(180deg);
+}
+60% {
+transform: rotate(216deg);
+}
+70% {
+transform: rotate(252deg);
+}
+80% {
+transform: rotate(288deg);
+}
+90% {
+transform: rotate(324deg);
+}
+100% {
+transform: rotate(360deg);
+}
+}
 @media screen and (max-width: 600px) {
-  #gameContainer {
-    width: 100%;
-    height: 250px;
-    border: 1px solid black;
-  }
-
-  #player {
-    width: 40px;
-    height: 40px;
-    left: 30px;
-  }
-
-  .obstacle {
-    width: 20px;
-    height: 40px;
-  }
-
-  #score {
-    font-size: 18px;
-  }
-
-  #startButton {
-    font-size: 18px;
-    padding: 10px 20px;
-  }
-
-  #restartButton {
-    font-size: 16px;
-    padding: 8px 16px;
-  }
-
-  #gameTitle {
-    font-size: 24px;
-  }
-
-  #musicButton {
-    width: 30px;
-    height: 30px;
-    top: 5px;
-    left: 5px;
-  }
+#gameContainer {
+width: 100%;
+height: 250px;
+border: 1px solid black;
+}
+#player {
+width: 40px;
+height: 40px;
+left: 30px;
+}
+.obstacle {
+width: 20px;
+height: 40px;
+}
+#score {
+font-size: 18px;
+}
+#startButton {
+font-size: 18px;
+padding: 10px 20px;
+}
+#restartButton {
+font-size: 16px;
+padding: 8px 16px;
+}
+#gameTitle {
+font-size: 24px;
+}
+#musicButton {
+width: 30px;
+height: 30px;
+top: 5px;
+left: 5px;
+}
 }
