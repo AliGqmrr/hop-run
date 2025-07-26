@@ -34,18 +34,20 @@ let backgroundChanges = 0;
 let jumpCheckerActive = false; 
 let bestRecord = getLocalStorage("bestRecord") || 0;
 
-function hideSplash() {
-  splash.style.opacity = 0;
+
+function closeSplash() {
+  splash.classList.add('fadeOut');
+  splash.style.pointerEvents = 'none';
   setTimeout(() => {
     splash.style.display = 'none';
     game.style.display = 'block';
   }, 1000);
 }
 
-splash.addEventListener('click', hideSplash);
+splash.addEventListener('click', closeSplash);
 
 window.onload = () => {
-  setTimeout(hideSplash, 2000);
+  setTimeout(closeSplash, 3000); 
 };
 
 if (bestRecord && typeof bestRecord === 'string') {
