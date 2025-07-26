@@ -58,38 +58,24 @@ window.onload = function() {
     }
 
   const splash = document.createElement('div');
-  splash.id = 'splash';
+  splash.style.position = 'fixed';
+  splash.style.inset = '0';
+  splash.style.backgroundColor = 'black';
+  splash.style.display = 'flex';
+  splash.style.justifyContent = 'center';
+  splash.style.alignItems = 'center';
+  splash.style.opacity = '0';
+  splash.style.transition = 'opacity 1.5s ease';
+  splash.style.zIndex = '9999';
 
   const img = document.createElement('img');
   img.src = 'https://hop-run.vercel.app/assets/splash_screen.png';
-  img.alt = 'Splash';
+  img.style.maxWidth = '80vw';
+  img.style.maxHeight = '80vh';
+  img.style.objectFit = 'contain';
+
   splash.appendChild(img);
-
   document.body.appendChild(splash);
-
-  const style = document.createElement('style');
-  style.textContent = `
-    html, body {
-      margin: 0; padding: 0; height: 100%; overflow: hidden;
-    }
-    #splash {
-      position: fixed;
-      inset: 0;
-      background: black;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      opacity: 0;
-      transition: opacity 1.5s ease;
-      z-index: 9999;
-    }
-    #splash img {
-      max-width: 80vw;
-      max-height: 80vh;
-      object-fit: contain;
-    }
-  `;
-  document.head.appendChild(style);
 
   requestAnimationFrame(() => {
     splash.style.opacity = '1';
