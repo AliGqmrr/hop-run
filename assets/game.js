@@ -12,8 +12,6 @@ const sun = document.getElementById("sun");
 const gameOverText = document.getElementById("gameOver");
 const gameOverScreen = document.getElementById("gameOverScreen");
 const randomTime = Math.random() * (60 - 30) + 30;
-const splash = document.getElementById('splashScreen');
-const game = document.getElementById('gameContainer');
 
 let countdown = 3;
 let countdownInterval;
@@ -33,22 +31,6 @@ let minTimeBetweenObstacles = 1500;
 let backgroundChanges = 0; 
 let jumpCheckerActive = false; 
 let bestRecord = getLocalStorage("bestRecord") || 0;
-
-
-function closeSplash() {
-  splash.classList.add('fadeOut');
-  splash.style.pointerEvents = 'none';
-  setTimeout(() => {
-    splash.style.display = 'none';
-    game.style.display = 'block';
-  }, 1000);
-}
-
-splash.addEventListener('click', closeSplash);
-
-window.onload = () => {
-  setTimeout(closeSplash, 3000); 
-};
 
 if (bestRecord && typeof bestRecord === 'string') {
   bestRecord = parseFloat(bestRecord.toString().trim());
