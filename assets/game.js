@@ -70,8 +70,8 @@ window.onload = function() {
 
   const img = document.createElement('img');
   img.src = 'https://hop-run.vercel.app/assets/splash_screen.png';
-  img.style.maxWidth = '80vw';
-  img.style.maxHeight = '80vh';
+  img.style.maxWidth = '95vw';
+  img.style.maxHeight = '95vh';
   img.style.objectFit = 'contain';
   img.style.opacity = '0';
   img.style.transition = 'opacity 1.5s ease';
