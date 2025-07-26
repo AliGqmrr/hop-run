@@ -83,14 +83,33 @@ window.onload = function() {
     img.style.opacity = '1';
   });
 
-  setTimeout(() => {
-    img.style.opacity = '0';
-    blackDiv.style.opacity = '0';
-    setTimeout(() => {
-      blackDiv.remove();
-      document.body.style.overflow = 'auto';
-    }, 1500);
-  }, 3500);
+  let removed = false;
+
+  function removeSplash(fast) {
+    if (removed) return;
+    removed = true;
+    if (fast) {
+      img.style.transition = 'opacity 0.5s ease';
+      blackDiv.style.transition = 'opacity 0.5s ease';
+      img.style.opacity = '0';
+      blackDiv.style.opacity = '0';
+      setTimeout(() => {
+        blackDiv.remove();
+        document.body.style.overflow = 'auto';
+      }, 500);
+    } else {
+      img.style.opacity = '0';
+      blackDiv.style.opacity = '0';
+      setTimeout(() => {
+        blackDiv.remove();
+        document.body.style.overflow = 'auto';
+      }, 1500);
+    }
+  }
+
+  blackDiv.addEventListener('click', () => removeSplash(true));
+
+  setTimeout(() => removeSplash(false), 3500);
 };
 
 function setLocalStorage(cname, cvalue, exdays) {
