@@ -57,34 +57,37 @@ window.onload = function() {
         musicButton.src = "https://hop-run.vercel.app/assets/musicoff.png";
     }
 
-  const splash = document.createElement('div');
-  splash.style.position = 'fixed';
-  splash.style.inset = '0';
-  splash.style.backgroundColor = 'black';
-  splash.style.display = 'flex';
-  splash.style.justifyContent = 'center';
-  splash.style.alignItems = 'center';
-  splash.style.opacity = '0';
-  splash.style.transition = 'opacity 1.5s ease';
-  splash.style.zIndex = '9999';
+  const blackDiv = document.createElement('div');
+  blackDiv.style.position = 'fixed';
+  blackDiv.style.inset = '0';
+  blackDiv.style.backgroundColor = 'black';
+  blackDiv.style.display = 'flex';
+  blackDiv.style.justifyContent = 'center';
+  blackDiv.style.alignItems = 'center';
+  blackDiv.style.opacity = '1';
+  blackDiv.style.transition = 'opacity 1.5s ease';
+  blackDiv.style.zIndex = '9999';
 
   const img = document.createElement('img');
   img.src = 'https://hop-run.vercel.app/assets/splash_screen.png';
   img.style.maxWidth = '80vw';
   img.style.maxHeight = '80vh';
   img.style.objectFit = 'contain';
+  img.style.opacity = '0';
+  img.style.transition = 'opacity 1.5s ease';
 
-  splash.appendChild(img);
-  document.body.appendChild(splash);
+  blackDiv.appendChild(img);
+  document.body.appendChild(blackDiv);
 
   requestAnimationFrame(() => {
-    splash.style.opacity = '1';
+    img.style.opacity = '1';
   });
 
   setTimeout(() => {
-    splash.style.opacity = '0';
+    img.style.opacity = '0';
+    blackDiv.style.opacity = '0';
     setTimeout(() => {
-      splash.remove();
+      blackDiv.remove();
       document.body.style.overflow = 'auto';
     }, 1500);
   }, 3500);
