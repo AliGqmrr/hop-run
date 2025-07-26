@@ -37,8 +37,50 @@ if (bestRecord && typeof bestRecord === 'string') {
 }
 
 window.onload = () => {
+  const splash = document.createElement("div");
+  splash.style.position = "fixed";
+  splash.style.top = 0;
+  splash.style.left = 0;
+  splash.style.width = "100vw";
+  splash.style.height = "100vh";
+  splash.style.background = "black";
+  splash.style.display = "flex";
+  splash.style.justifyContent = "center";
+  splash.style.alignItems = "center";
+  splash.style.opacity = 0;
+  splash.style.transition = "opacity 1s ease";
+  splash.style.zIndex = 9999;
+  splash.style.cursor = "pointer";
+
+  const img = document.createElement("img");
+  img.src = "https://hop-run.vercel.app/assets/splash_screen.png";
+  img.style.maxWidth = "80vw";
+  img.style.maxHeight = "80vh";
+
+  splash.appendChild(img);
+  document.body.appendChild(splash);
+
+  setTimeout(() => {
+    splash.style.opacity = 1;
+  }, 10);
+
+  const hideSplash = () => {
+    splash.style.opacity = 0;
+    setTimeout(() => {
+      splash.remove();
+    }, 1000);
+  };
+
+  setTimeout(() => {
+    hideSplash();
+  }, 2000);
+
+  splash.addEventListener("click", () => {
+    hideSplash();
+  });
+
   setLocalStorage("bestRecord", parseFloat(bestRecord.toString().trim()), 365);
-  
+
   if (bestRecord !== undefined && bestRecord !== null && bestRecord !== "") {
     scoreElement.innerText = `Score: ${score}, Best Record: ${bestRecord}`;
     bestRecordElement.innerHTML = `Your Best Record: ${bestRecord}`;
@@ -47,7 +89,6 @@ window.onload = () => {
     scoreElement.innerText = `Score: ${score}, Best Record: 0`;
   }
 };
-
 
 window.onload = function() {
     if (isMusicOn) {
