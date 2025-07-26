@@ -49,13 +49,13 @@ window.onload = () => {
 };
 
 window.onload = function() {
-    if (isMusicOn) {
-        backgroundMusic.play();
-        musicButton.src = "https://hop-run.vercel.app/assets/musicopen.png";
-    } else {
-        backgroundMusic.pause();
-        musicButton.src = "https://hop-run.vercel.app/assets/musicoff.png";
-    }
+  if (isMusicOn) {
+    backgroundMusic.play();
+    musicButton.src = "https://hop-run.vercel.app/assets/musicopen.png";
+  } else {
+    backgroundMusic.pause();
+    musicButton.src = "https://hop-run.vercel.app/assets/musicoff.png";
+  }
 
   const blackDiv = document.createElement('div');
   blackDiv.style.position = 'fixed';
@@ -88,13 +88,12 @@ window.onload = function() {
   function removeSplash() {
     if (removed) return;
     removed = true;
-      img.style.opacity = '0';
-      blackDiv.style.opacity = '0';
-      setTimeout(() => {
-        blackDiv.remove();
-        document.body.style.overflow = 'auto';
-      }, 1500);
-    }
+    img.style.opacity = '0';
+    blackDiv.style.opacity = '0';
+    setTimeout(() => {
+      blackDiv.remove();
+      document.body.style.overflow = 'auto';
+    }, 1500);
   }
 
   blackDiv.addEventListener('click', () => removeSplash());
