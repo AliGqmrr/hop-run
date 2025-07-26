@@ -36,7 +36,27 @@ if (bestRecord && typeof bestRecord === 'string') {
   bestRecord = parseFloat(bestRecord.toString().trim());
 }
 
+window.onload = () => {
+  setLocalStorage("bestRecord", parseFloat(bestRecord.toString().trim()), 365);
+
+  if (bestRecord !== undefined && bestRecord !== null && bestRecord !== "") {
+    scoreElement.innerText = `Score: ${score}, Best Record: ${bestRecord}`;
+    bestRecordElement.innerHTML = `Your Best Record: ${bestRecord}`;
+  } else {
+    bestRecordElement.innerHTML = "Your Best Record: 0";
+    scoreElement.innerText = `Score: ${score}, Best Record: 0`;
+  }
+};
+
 window.onload = function() {
+    if (isMusicOn) {
+        backgroundMusic.play();
+        musicButton.src = "https://hop-run.vercel.app/assets/musicopen.png";
+    } else {
+        backgroundMusic.pause();
+        musicButton.src = "https://hop-run.vercel.app/assets/musicoff.png";
+    }
+
   const splash = document.createElement('div');
   splash.id = 'splash';
 
@@ -71,7 +91,6 @@ window.onload = function() {
   `;
   document.head.appendChild(style);
 
-  // Fade in
   requestAnimationFrame(() => {
     splash.style.opacity = '1';
   });
@@ -83,28 +102,6 @@ window.onload = function() {
       document.body.style.overflow = 'auto';
     }, 1500);
   }, 3500);
-};
-
-window.onload = () => {
-  setLocalStorage("bestRecord", parseFloat(bestRecord.toString().trim()), 365);
-
-  if (bestRecord !== undefined && bestRecord !== null && bestRecord !== "") {
-    scoreElement.innerText = `Score: ${score}, Best Record: ${bestRecord}`;
-    bestRecordElement.innerHTML = `Your Best Record: ${bestRecord}`;
-  } else {
-    bestRecordElement.innerHTML = "Your Best Record: 0";
-    scoreElement.innerText = `Score: ${score}, Best Record: 0`;
-  }
-};
-
-window.onload = function() {
-    if (isMusicOn) {
-        backgroundMusic.play();
-        musicButton.src = "https://hop-run.vercel.app/assets/musicopen.png";
-    } else {
-        backgroundMusic.pause();
-        musicButton.src = "https://hop-run.vercel.app/assets/musicoff.png";
-    }
 };
 
 function setLocalStorage(cname, cvalue, exdays) {
