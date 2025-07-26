@@ -85,19 +85,9 @@ window.onload = function() {
 
   let removed = false;
 
-  function removeSplash(fast) {
+  function removeSplash() {
     if (removed) return;
     removed = true;
-    if (fast) {
-      img.style.transition = 'opacity 0.5s ease';
-      blackDiv.style.transition = 'opacity 0.5s ease';
-      img.style.opacity = '0';
-      blackDiv.style.opacity = '0';
-      setTimeout(() => {
-        blackDiv.remove();
-        document.body.style.overflow = 'auto';
-      }, 500);
-    } else {
       img.style.opacity = '0';
       blackDiv.style.opacity = '0';
       setTimeout(() => {
@@ -107,9 +97,9 @@ window.onload = function() {
     }
   }
 
-  blackDiv.addEventListener('click', () => removeSplash(true));
+  blackDiv.addEventListener('click', () => removeSplash());
 
-  setTimeout(() => removeSplash(false), 3500);
+  setTimeout(() => removeSplash(), 3500);
 };
 
 function setLocalStorage(cname, cvalue, exdays) {
