@@ -84,8 +84,6 @@ window.onload = function() {
     }, 1500);
   }, 3500);
 };
-</script>
-
 
 window.onload = () => {
   setLocalStorage("bestRecord", parseFloat(bestRecord.toString().trim()), 365);
