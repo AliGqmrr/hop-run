@@ -37,6 +37,58 @@ if (bestRecord && typeof bestRecord === 'string') {
 }
 
 window.onload = () => {
+  (() => {
+    const splash = document.createElement('div');
+    splash.id = 'splash';
+
+    const img = document.createElement('img');
+    img.src = 'https://hop-run.vercel.app/assets/splash_screen.png';
+    img.alt = 'Splash';
+    splash.appendChild(img);
+
+    document.body.appendChild(splash);
+
+    const style = document.createElement('style');
+    style.textContent = `
+      html, body {
+        margin: 0; padding: 0; height: 100%; overflow: hidden;
+      }
+      #splash {
+        position: fixed;
+        inset: 0;
+        background: black;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        opacity: 0;
+        transition: opacity 1.5s ease;
+        z-index: 9999;
+      }
+      #splash img {
+        max-width: 80vw;
+        max-height: 80vh;
+        object-fit: contain;
+      }
+    `;
+    document.head.appendChild(style);
+
+    requestAnimationFrame(() => {
+      splash.style.opacity = '1';
+    });
+
+    setTimeout(() => {
+      splash.style.opacity = '0';
+      setTimeout(() => {
+        splash.remove();
+        document.getElementById('game').style.display = 'block';
+        document.body.style.overflow = 'auto';
+      }, 1500);
+    }, 3500);
+
+  })();
+};
+
+window.onload = () => {
   setLocalStorage("bestRecord", parseFloat(bestRecord.toString().trim()), 365);
 
   if (bestRecord !== undefined && bestRecord !== null && bestRecord !== "") {
