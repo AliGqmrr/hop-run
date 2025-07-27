@@ -66,28 +66,26 @@ window.onload = function() {
   blackDiv.style.transition = 'opacity 2.5s ease';
   blackDiv.style.zIndex = '9999';
   blackDiv.style.overflow = 'hidden';
-  
+
+  const imgWrapper = document.createElement('div');
+  imgWrapper.style.position = 'relative';
+  imgWrapper.style.width = '90vw';
+  imgWrapper.style.height = '90vh';
+
   const img = document.createElement('img');
   img.src = 'https://hop-run.vercel.app/assets/splash_screen.png';
-  img.style.maxWidth = '100vw';
-  img.style.maxHeight = '100vh';
-  img.style.width = '90vw';
-  img.style.height = '90vh';
+  img.style.width = '100%';
+  img.style.height = '100%';
   img.style.objectFit = 'contain';
   img.style.opacity = '0';
   img.style.transition = 'opacity 2.5s ease';
-  img.style.position = 'relative';
-  
-  blackDiv.appendChild(img);
-  document.body.appendChild(blackDiv);
-  
-  requestAnimationFrame(() => {
-    img.style.opacity = '1';
-  });
-  
+  img.style.display = 'block';
+
   const gameTitle = document.createElement('div');
   gameTitle.innerHTML = 'Hop & Run';
   gameTitle.style.position = 'absolute';
+  gameTitle.style.right = '20px';
+  gameTitle.style.bottom = '20px';
   gameTitle.style.fontFamily = 'Arial, sans-serif';
   gameTitle.style.fontWeight = '700';
   gameTitle.style.fontStyle = 'normal';
@@ -96,18 +94,22 @@ window.onload = function() {
   gameTitle.style.color = 'rgb(255, 255, 255)';
   gameTitle.style.opacity = '0';
   gameTitle.style.transition = 'opacity 1.5s ease';
-  
-  blackDiv.appendChild(gameTitle);
-  
+
+  imgWrapper.appendChild(img);
+  imgWrapper.appendChild(gameTitle);
+  blackDiv.appendChild(imgWrapper);
+  document.body.appendChild(blackDiv);
+
+  requestAnimationFrame(() => {
+    img.style.opacity = '1';
+  });
+
   setTimeout(() => {
-    const imgRect = img.getBoundingClientRect();
-    gameTitle.style.left = `${imgRect.right - gameTitle.offsetWidth - 20}px`;
-    gameTitle.style.top = `${imgRect.bottom - 50}px`;
     gameTitle.style.opacity = '1';
   }, 1500);
-  
+
   let removed = false;
-  
+
   function removeSplash() {
     if (removed) return;
     removed = true;
@@ -119,7 +121,7 @@ window.onload = function() {
       document.body.style.overflow = 'auto';
     }, 1500);
   }
-  
+
   blackDiv.addEventListener('click', () => removeSplash());
   setTimeout(() => removeSplash(), 5000);
 };
