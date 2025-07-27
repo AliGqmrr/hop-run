@@ -36,7 +36,7 @@ if (bestRecord && typeof bestRecord === 'string') {
   bestRecord = parseFloat(bestRecord.toString().trim());
 }
 
-window.onload = function() {
+window.onload = function () {
   setLocalStorage("bestRecord", parseFloat(bestRecord.toString().trim()), 365);
 
   if (bestRecord !== undefined && bestRecord !== null && bestRecord !== "") {
@@ -82,10 +82,8 @@ window.onload = function() {
   img.style.display = 'block';
 
   const gameTitle = document.createElement('div');
-  gameTitle.innerHTML = 'Hop & Run';
+  gameTitle.innerText = 'Hop & Run';
   gameTitle.style.position = 'absolute';
-  gameTitle.style.right = '20px';
-  gameTitle.style.bottom = '20px';
   gameTitle.style.fontFamily = 'Arial, sans-serif';
   gameTitle.style.fontWeight = '700';
   gameTitle.style.fontStyle = 'normal';
@@ -107,6 +105,15 @@ window.onload = function() {
   setTimeout(() => {
     gameTitle.style.opacity = '1';
   }, 1500);
+
+  img.onload = () => {
+    const wrapperRect = imgWrapper.getBoundingClientRect();
+    const titleRect = gameTitle.getBoundingClientRect();
+    const padding = 12;
+
+    gameTitle.style.left = (wrapperRect.width - titleRect.width - padding) + 'px';
+    gameTitle.style.top = (wrapperRect.height - titleRect.height - padding) + 'px';
+  };
 
   let removed = false;
 
