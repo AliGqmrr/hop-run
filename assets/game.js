@@ -184,45 +184,25 @@ function generateObstacle() {
   lastObstacleTime = currentTime;
 }
 
-async function moveObstacles() {
-  async function sha256(message) {
-    const msgBuffer = new TextEncoder().encode(message);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
-    const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
-  }
-
-  async function verifyHash(newScore) {
-    const expectedHash = await sha256((newScore - 1).toString());
-    return expectedHash === scoreHash;
-  }
-
-  async function updateHash(newScore) {
-    scoreHash = await sha256((newScore - 1).toString());
-  }
-
-  for (let i = obstacles.length - 1; i >= 0; i--) {
-    const obstacle = obstacles[i];
-    let obstaclePosition = parseInt(obstacle.style.right) || 0;
+function moveObstacles() {
+  obstacles.forEach((obstacle, index) => {
+    let obstaclePosition = parseInt(obstacle.style.right);
     obstacle.style.right = `${obstaclePosition + obstacleSpeed}px`;
 
     const obstacleRect = obstacle.getBoundingClientRect();
     const gameContainerRect = gameContainer.getBoundingClientRect();
 
     if (obstacleRect.left <= gameContainerRect.left) {
-      const isValid = await verifyHash(score + 1);
-      if (!isValid && scoreHash !== "") {
-        endGame();
-        return;
-      }
-
       obstacle.remove();
-      obstacles.splice(i, 1);
+      obstacles.splice(index, 1);
 
       score++;
 
-      await updateHash(score);
+      if (score > verifiedScore + 1) {
+        score = verifiedScore + 1; 
+      }
 
+      verifiedScore = score;
       showScoreAnimation();
 
       if (score > bestRecord) {
@@ -235,7 +215,6 @@ async function moveObstacles() {
     }
 
     const playerRect = player.getBoundingClientRect();
-
     if (
       playerRect.left < obstacleRect.right &&
       playerRect.right > obstacleRect.left &&
@@ -243,9 +222,8 @@ async function moveObstacles() {
       playerRect.top < obstacleRect.bottom
     ) {
       endGame();
-      return;
     }
-  }
+  });
 }
 
 function showScoreAnimation() {
