@@ -97,16 +97,21 @@ window.onload = function () {
   blackDiv.appendChild(imgWrapper);
   document.body.appendChild(blackDiv);
 
-  requestAnimationFrame(() => {
+  img.addEventListener('load', () => {
     img.style.opacity = '1';
-  });
 
-  setTimeout(() => {
-    const wrapperRect = imgWrapper.getBoundingClientRect();
-    gameTitle.style.left = (wrapperRect.width - 20 - gameTitle.offsetWidth) + 'px';
-    gameTitle.style.top = (wrapperRect.height - 20 - gameTitle.offsetHeight) + 'px';
-    gameTitle.style.opacity = '1';
-  }, 1500);
+    const updatePosition = () => {
+      gameTitle.style.left = (img.clientWidth - gameTitle.offsetWidth - 20) + 'px';
+      gameTitle.style.top = (img.clientHeight - gameTitle.offsetHeight - 20) + 'px';
+    };
+
+    updatePosition();
+    window.addEventListener('resize', updatePosition);
+
+    setTimeout(() => {
+      gameTitle.style.opacity = '1';
+    }, 1500);
+  });
 
   let removed = false;
 
