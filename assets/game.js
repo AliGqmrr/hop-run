@@ -57,7 +57,7 @@ window.onload = function() {
     musicButton.src = "https://hop-run.vercel.app/assets/musicoff.png";
   }
 
-  const blackDiv = document.createElement('div');
+/*  const blackDiv = document.createElement('div');
   blackDiv.style.position = 'fixed';
   blackDiv.style.inset = '0';
   blackDiv.style.backgroundColor = 'black';
@@ -100,7 +100,7 @@ window.onload = function() {
 
   blackDiv.addEventListener('click', () => removeSplash());
 
-  setTimeout(() => removeSplash(), 5000);
+  setTimeout(() => removeSplash(), 5000);*/
 };
 
 function setLocalStorage(cname, cvalue, exdays) {
