@@ -80,37 +80,12 @@ window.onload = function () {
   img.style.transition = 'opacity 2.5s ease';
   img.style.display = 'block';
 
-  const gameTitle = document.createElement('div');
-  gameTitle.innerHTML = 'Hop & Run';
-  gameTitle.style.position = 'absolute';
-  gameTitle.style.fontFamily = 'Arial, sans-serif';
-  gameTitle.style.fontWeight = '700';
-  gameTitle.style.fontStyle = 'normal';
-  gameTitle.style.lineHeight = 'normal';
-  gameTitle.style.fontSize = '36px';
-  gameTitle.style.color = 'rgb(255, 255, 255)';
-  gameTitle.style.opacity = '0';
-  gameTitle.style.transition = 'opacity 1.5s ease';
-
   imgWrapper.appendChild(img);
-  imgWrapper.appendChild(gameTitle);
   blackDiv.appendChild(imgWrapper);
   document.body.appendChild(blackDiv);
 
   img.addEventListener('load', () => {
     img.style.opacity = '1';
-
-    const updatePosition = () => {
-      gameTitle.style.left = (img.clientWidth - gameTitle.offsetWidth - 20) + 'px';
-      gameTitle.style.top = (img.clientHeight - gameTitle.offsetHeight - 20) + 'px';
-    };
-
-    updatePosition();
-    window.addEventListener('resize', updatePosition);
-
-    setTimeout(() => {
-      gameTitle.style.opacity = '1';
-    }, 1500);
   });
 
   let removed = false;
@@ -120,7 +95,6 @@ window.onload = function () {
     removed = true;
     img.style.opacity = '0';
     blackDiv.style.opacity = '0';
-    gameTitle.style.opacity = '0';
     setTimeout(() => {
       blackDiv.remove();
       document.body.style.overflow = 'auto';
