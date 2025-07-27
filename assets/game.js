@@ -65,7 +65,7 @@ window.onload = function() {
   blackDiv.style.justifyContent = 'center';
   blackDiv.style.alignItems = 'center';
   blackDiv.style.opacity = '1';
-  blackDiv.style.transition = 'opacity 1.5s ease';
+  blackDiv.style.transition = 'opacity 2.5s ease';
   blackDiv.style.zIndex = '9999';
 
   const img = document.createElement('img');
