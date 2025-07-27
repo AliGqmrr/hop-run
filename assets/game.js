@@ -32,10 +32,6 @@ let backgroundChanges = 0;
 let jumpCheckerActive = false; 
 let bestRecord = getLocalStorage("bestRecord") || 0;
 
-if (bestRecord && typeof bestRecord === 'string') {
-  bestRecord = parseFloat(bestRecord.toString().trim());
-}
-
 window.onload = function () {
   setLocalStorage("bestRecord", parseFloat(bestRecord.toString().trim()), 365);
   if (bestRecord !== undefined && bestRecord !== null && bestRecord !== "") {
@@ -73,6 +69,7 @@ window.onload = function () {
 
   const img = document.createElement('img');
   img.src = 'https://hop-run.vercel.app/assets/splash_screen.png';
+  img.alt = 'Hop & Run Splash Screen';
   img.style.width = '100%';
   img.style.height = '100%';
   img.style.objectFit = 'contain';
