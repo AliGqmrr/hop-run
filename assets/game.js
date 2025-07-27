@@ -76,6 +76,7 @@ window.onload = function() {
   img.style.objectFit = 'contain';
   img.style.opacity = '0';
   img.style.transition = 'opacity 2.5s ease';
+  img.style.position = 'relative';
   
   blackDiv.appendChild(img);
   document.body.appendChild(blackDiv);
@@ -87,16 +88,21 @@ window.onload = function() {
   const gameTitle = document.createElement('div');
   gameTitle.innerHTML = 'Hop & Run';
   gameTitle.style.position = 'absolute';
-  gameTitle.style.bottom = '5%';
-  gameTitle.style.right = '5%';
+  gameTitle.style.fontFamily = 'Arial, sans-serif';
+  gameTitle.style.fontWeight = '700';
+  gameTitle.style.fontStyle = 'normal';
+  gameTitle.style.lineHeight = 'normal';
   gameTitle.style.fontSize = '36px';
-  gameTitle.style.color = 'white';
-  gameTitle.style.fontFamily = 'sans-serif';
+  gameTitle.style.color = 'rgb(255, 255, 255)';
   gameTitle.style.opacity = '0';
   gameTitle.style.transition = 'opacity 1.5s ease';
+  
   blackDiv.appendChild(gameTitle);
-
+  
   setTimeout(() => {
+    const imgRect = img.getBoundingClientRect();
+    gameTitle.style.left = `${imgRect.right - gameTitle.offsetWidth - 20}px`;
+    gameTitle.style.top = `${imgRect.bottom - 50}px`;
     gameTitle.style.opacity = '1';
   }, 1500);
   
