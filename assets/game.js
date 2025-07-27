@@ -192,13 +192,13 @@ async function moveObstacles() {
     return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
   }
 
-  async function updateScoreHash() {
-    scoreHash = await sha256((score - 1).toString());
+  async function verifyHash(newScore) {
+    const expectedHash = await sha256((newScore - 1).toString());
+    return expectedHash === scoreHash;
   }
 
-  async function verifyScoreHash() {
-    const expectedHash = await sha256((score - 1).toString());
-    return expectedHash === scoreHash;
+  async function updateHash(newScore) {
+    scoreHash = await sha256((newScore - 1).toString());
   }
 
   for (let i = obstacles.length - 1; i >= 0; i--) {
@@ -210,11 +210,18 @@ async function moveObstacles() {
     const gameContainerRect = gameContainer.getBoundingClientRect();
 
     if (obstacleRect.left <= gameContainerRect.left) {
+      const isValid = await verifyHash(score + 1);
+      if (!isValid && scoreHash !== "") {
+        endGame();
+        return;
+      }
+
       obstacle.remove();
       obstacles.splice(i, 1);
 
       score++;
-      await updateScoreHash();
+
+      await updateHash(score);
 
       showScoreAnimation();
 
@@ -228,11 +235,6 @@ async function moveObstacles() {
     }
 
     const playerRect = player.getBoundingClientRect();
-
-    if (!(await verifyScoreHash())) {
-      endGame();
-      return;
-    }
 
     if (
       playerRect.left < obstacleRect.right &&
