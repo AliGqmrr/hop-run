@@ -13,7 +13,6 @@ const gameOverText = document.getElementById("gameOver");
 const gameOverScreen = document.getElementById("gameOverScreen");
 const randomTime = Math.random() * (60 - 30) + 30;
 
-let scoreHash = "";
 let countdown = 3;
 let countdownInterval;
 let isMusicOn = localStorage.getItem("isMusicOn") === "true" || false; 
@@ -21,6 +20,7 @@ let isJumping = false;
 let isGameStart = false;
 let isGameOver = false;
 let score = 0;
+let verifedScore = 0;
 let obstacles = [];
 let gameInterval, obstacleInterval;
 let obstacleSpeed = 7; 
