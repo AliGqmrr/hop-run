@@ -38,7 +38,6 @@ if (bestRecord && typeof bestRecord === 'string') {
 
 window.onload = function () {
   setLocalStorage("bestRecord", parseFloat(bestRecord.toString().trim()), 365);
-
   if (bestRecord !== undefined && bestRecord !== null && bestRecord !== "") {
     scoreElement.innerText = `Score: ${score}, Best Record: ${bestRecord}`;
     bestRecordElement.innerHTML = `Your Best Record: ${bestRecord}`;
@@ -82,7 +81,7 @@ window.onload = function () {
   img.style.display = 'block';
 
   const gameTitle = document.createElement('div');
-  gameTitle.innerText = 'Hop & Run';
+  gameTitle.innerHTML = 'Hop & Run';
   gameTitle.style.position = 'absolute';
   gameTitle.style.fontFamily = 'Arial, sans-serif';
   gameTitle.style.fontWeight = '700';
@@ -103,17 +102,11 @@ window.onload = function () {
   });
 
   setTimeout(() => {
+    const wrapperRect = imgWrapper.getBoundingClientRect();
+    gameTitle.style.left = (wrapperRect.width - 20 - gameTitle.offsetWidth) + 'px';
+    gameTitle.style.top = (wrapperRect.height - 20 - gameTitle.offsetHeight) + 'px';
     gameTitle.style.opacity = '1';
   }, 1500);
-
-  img.onload = () => {
-    const wrapperRect = imgWrapper.getBoundingClientRect();
-    const titleRect = gameTitle.getBoundingClientRect();
-    const padding = 12;
-
-    gameTitle.style.left = (wrapperRect.width - titleRect.width - padding) + 'px';
-    gameTitle.style.top = (wrapperRect.height - titleRect.height - padding) + 'px';
-  };
 
   let removed = false;
 
