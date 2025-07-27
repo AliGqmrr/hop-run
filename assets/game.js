@@ -20,7 +20,7 @@ let isJumping = false;
 let isGameStart = false;
 let isGameOver = false;
 let score = 0;
-let verifedScore = 0;
+let verifiedScore = 0;
 let obstacles = [];
 let gameInterval, obstacleInterval;
 let obstacleSpeed = 7; 
