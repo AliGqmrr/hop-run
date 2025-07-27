@@ -13,13 +13,13 @@ const gameOverText = document.getElementById("gameOver");
 const gameOverScreen = document.getElementById("gameOverScreen");
 const randomTime = Math.random() * (60 - 30) + 30;
 
+let scoreHash = "";
 let countdown = 3;
 let countdownInterval;
 let isMusicOn = localStorage.getItem("isMusicOn") === "true" || false; 
 let isJumping = false;
 let isGameStart = false;
 let isGameOver = false;
-let verifiedScore = 0;
 let score = 0;
 let obstacles = [];
 let gameInterval, obstacleInterval;
@@ -184,9 +184,26 @@ function generateObstacle() {
   lastObstacleTime = currentTime;
 }
 
-function moveObstacles() {
-  obstacles.forEach((obstacle, index) => {
-    let obstaclePosition = parseInt(obstacle.style.right);
+async function moveObstacles() {
+  async function sha256(message) {
+    const msgBuffer = new TextEncoder().encode(message);
+    const hashBuffer = await crypto.subtle.digest('SHA-256', msgBuffer);
+    const hashArray = Array.from(new Uint8Array(hashBuffer));
+    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  }
+
+  async function updateScoreHash() {
+    scoreHash = await sha256((score - 1).toString());
+  }
+
+  async function verifyScoreHash() {
+    const expectedHash = await sha256((score - 1).toString());
+    return expectedHash === scoreHash;
+  }
+
+  for (let i = obstacles.length - 1; i >= 0; i--) {
+    const obstacle = obstacles[i];
+    let obstaclePosition = parseInt(obstacle.style.right) || 0;
     obstacle.style.right = `${obstaclePosition + obstacleSpeed}px`;
 
     const obstacleRect = obstacle.getBoundingClientRect();
@@ -194,15 +211,11 @@ function moveObstacles() {
 
     if (obstacleRect.left <= gameContainerRect.left) {
       obstacle.remove();
-      obstacles.splice(index, 1);
+      obstacles.splice(i, 1);
 
       score++;
+      await updateScoreHash();
 
-      if (score > verifiedScore + 1) {
-        score = verifiedScore + 1; 
-      }
-
-      verifiedScore = score;
       showScoreAnimation();
 
       if (score > bestRecord) {
@@ -215,6 +228,12 @@ function moveObstacles() {
     }
 
     const playerRect = player.getBoundingClientRect();
+
+    if (!(await verifyScoreHash())) {
+      endGame();
+      return;
+    }
+
     if (
       playerRect.left < obstacleRect.right &&
       playerRect.right > obstacleRect.left &&
@@ -222,8 +241,9 @@ function moveObstacles() {
       playerRect.top < obstacleRect.bottom
     ) {
       endGame();
+      return;
     }
-  });
+  }
 }
 
 function showScoreAnimation() {
