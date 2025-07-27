@@ -65,7 +65,8 @@ window.onload = function() {
   blackDiv.style.opacity = '1';
   blackDiv.style.transition = 'opacity 2.5s ease';
   blackDiv.style.zIndex = '9999';
-
+  blackDiv.style.overflow = 'hidden';
+  
   const img = document.createElement('img');
   img.src = 'https://hop-run.vercel.app/assets/splash_screen.png';
   img.style.maxWidth = '100vw';
@@ -75,29 +76,45 @@ window.onload = function() {
   img.style.objectFit = 'contain';
   img.style.opacity = '0';
   img.style.transition = 'opacity 2.5s ease';
-
+  
   blackDiv.appendChild(img);
   document.body.appendChild(blackDiv);
-
+  
   requestAnimationFrame(() => {
     img.style.opacity = '1';
   });
+  
+  const gameTitle = document.createElement('div');
+  gameTitle.innerHTML = 'Hop & Run';
+  gameTitle.style.position = 'absolute';
+  gameTitle.style.bottom = '5%';
+  gameTitle.style.right = '5%';
+  gameTitle.style.fontSize = '36px';
+  gameTitle.style.color = 'white';
+  gameTitle.style.fontFamily = 'sans-serif';
+  gameTitle.style.opacity = '0';
+  gameTitle.style.transition = 'opacity 1.5s ease';
+  blackDiv.appendChild(gameTitle);
 
+  setTimeout(() => {
+    gameTitle.style.opacity = '1';
+  }, 1500);
+  
   let removed = false;
-
+  
   function removeSplash() {
     if (removed) return;
     removed = true;
     img.style.opacity = '0';
     blackDiv.style.opacity = '0';
+    gameTitle.style.opacity = '0';
     setTimeout(() => {
       blackDiv.remove();
       document.body.style.overflow = 'auto';
     }, 1500);
   }
-
+  
   blackDiv.addEventListener('click', () => removeSplash());
-
   setTimeout(() => removeSplash(), 5000);
 };
 
