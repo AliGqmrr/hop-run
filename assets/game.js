@@ -76,7 +76,7 @@ window.onload = function() {
   img.style.height = '90vh';
   img.style.objectFit = 'contain';
   img.style.opacity = '0';
-  img.style.transition = 'opacity 1.5s ease';
+  img.style.transition = 'opacity 2.5s ease';
 
   blackDiv.appendChild(img);
   document.body.appendChild(blackDiv);
