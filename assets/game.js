@@ -36,7 +36,7 @@ if (bestRecord && typeof bestRecord === 'string') {
   bestRecord = parseFloat(bestRecord.toString().trim());
 }
 
-window.onload = () => {
+window.onload = function() {
   setLocalStorage("bestRecord", parseFloat(bestRecord.toString().trim()), 365);
 
   if (bestRecord !== undefined && bestRecord !== null && bestRecord !== "") {
@@ -46,9 +46,7 @@ window.onload = () => {
     bestRecordElement.innerHTML = "Your Best Record: 0";
     scoreElement.innerText = `Score: ${score}, Best Record: 0`;
   }
-};
 
-window.onload = function() {
   if (isMusicOn) {
     backgroundMusic.play();
     musicButton.src = "https://hop-run.vercel.app/assets/musicopen.png";
