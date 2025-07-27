@@ -100,7 +100,7 @@ window.onload = function() {
 
   blackDiv.addEventListener('click', () => removeSplash());
 
-  setTimeout(() => removeSplash(), 3500);
+  setTimeout(() => removeSplash(), 5000);
 };
 
 function setLocalStorage(cname, cvalue, exdays) {
