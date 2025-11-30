@@ -457,7 +457,7 @@ document.addEventListener("keydown", (event) => {
   if (event.key.toLowerCase() === "c") {
     jumpCheckerActive = !jumpCheckerActive;
     console.log(
-      `Jump check is now ${jumpCheckerActive ? "active" : "inactive"}.`
+      `Cheat is ${jumpCheckerActive ? "active" : "inactive"}.`
     );
   }
 });
